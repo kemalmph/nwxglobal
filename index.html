@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NWX Global — Ecosystem · Trading · Investment</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --gold-pale: #F5E9C8;
+    --obsidian: #0A0A0A;
+    --charcoal: #141414;
+    --slate: #1E1E1E;
+    --mist: #2A2A2A;
+    --ivory: #F7F4EE;
+    --warm-white: #FDFAF5;
+    --text-muted: #888880;
+    --text-mid: #B8B4AC;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--obsidian);
+    color: var(--ivory);
+    font-family: 'Barlow', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.35;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 4rem;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95), transparent);
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo svg {
+    height: 36px;
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 50%, rgba(201,168,76,0.07) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 85% 20%, rgba(201,168,76,0.04) 0%, transparent 50%),
+      linear-gradient(135deg, #0A0A0A 0%, #111008 50%, #0A0A0A 100%);
+  }
+
+  .hero-geo {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 480px;
+    height: 480px;
+    opacity: 0.12;
+    animation: spin-slow 60s linear infinite;
+  }
+
+  @keyframes spin-slow { to { transform: translateY(-50%) rotate(360deg); } }
+
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 2rem;
+    opacity: 0;
+    animation: fade-up 0.8s 0.2s ease forwards;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fade-up 0.8s 0.4s ease forwards;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fade-up 0.8s 0.6s ease forwards;
+  }
+
+  .hero-tagline span {
+    color: var(--gold);
+    margin: 0 0.5rem;
+  }
+
+  .hero-desc {
+    max-width: 480px;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text-mid);
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fade-up 0.8s 0.8s ease forwards;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    opacity: 0;
+    animation: fade-up 0.8s 1s ease forwards;
+  }
+
+  .btn-primary {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--obsidian);
+    background: var(--gold);
+    border: none;
+    padding: 0.9rem 2.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border: 1px solid rgba(201,168,76,0.35);
+    padding: 0.9rem 2.5rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.3s, background 0.3s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fade-up 1s 1.4s ease forwards;
+  }
+
+  .hero-scroll span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+    margin: 0;
+  }
+
+  /* ─── STATS BAR ─── */
+  .stats-bar {
+    background: var(--charcoal);
+    padding: 2rem 4rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-bottom: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .stat-item {
+    text-align: center;
+    padding: 1rem;
+    border-right: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .stat-item:last-child { border-right: none; }
+
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 0.4rem;
+  }
+
+  /* ─── SECTION GENERIC ─── */
+  section {
+    padding: 7rem 4rem;
+  }
+
+  .section-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-title em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  /* ─── ABOUT ─── */
+  .about {
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--text-mid);
+    margin-bottom: 1.2rem;
+  }
+
+  .about-text p strong {
+    color: var(--ivory);
+    font-weight: 500;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 420px;
+  }
+
+  .about-card {
+    position: absolute;
+    background: var(--slate);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 2rem;
+  }
+
+  .about-card.main {
+    top: 0; right: 0;
+    width: 85%;
+    height: 72%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(135deg, #1a1810 0%, #141414 100%);
+  }
+
+  .about-card.accent {
+    bottom: 0; left: 0;
+    width: 55%;
+    padding: 1.5rem;
+    background: var(--charcoal);
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .about-card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .about-card-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1.3;
+    color: var(--ivory);
+  }
+
+  .about-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .about-card-sub {
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* ─── PILLARS ─── */
+  .pillars {
+    background: var(--obsidian);
+  }
+
+  .pillars-header {
+    max-width: 600px;
+    margin-bottom: 4rem;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+  }
+
+  .pillar-card {
+    background: var(--charcoal);
+    padding: 3rem 2.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.4s;
+  }
+
+  .pillar-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .pillar-card:hover { background: var(--slate); }
+  .pillar-card:hover::before { transform: scaleX(1); }
+
+  .pillar-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 5rem;
+    font-weight: 300;
+    color: rgba(201,168,76,0.1);
+    line-height: 1;
+    margin-bottom: 1.5rem;
+    transition: color 0.4s;
+  }
+
+  .pillar-card:hover .pillar-num { color: rgba(201,168,76,0.2); }
+
+  .pillar-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .pillar-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    margin-bottom: 0.3rem;
+    color: var(--ivory);
+  }
+
+  .pillar-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  .pillar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 0.3rem 0.8rem;
+  }
+
+  /* ─── WHO WE SERVE ─── */
+  .audience {
+    background: var(--charcoal);
+  }
+
+  .audience-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .audience-card {
+    background: var(--slate);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 2.5rem;
+    position: relative;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .audience-card:hover {
+    border-color: rgba(201,168,76,0.25);
+    transform: translateY(-4px);
+  }
+
+  .audience-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid rgba(201,168,76,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+  }
+
+  .audience-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 0.75rem;
+  }
+
+  .audience-desc {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+  }
+
+  /* ─── PRESENCE ─── */
+  .presence {
+    background: var(--obsidian);
+    text-align: center;
+  }
+
+  .presence-header {
+    margin-bottom: 4rem;
+  }
+
+  .location-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .location-card {
+    background: var(--charcoal);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 2.5rem 3.5rem;
+    min-width: 240px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .location-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+
+  .location-card.primary {
+    border-color: rgba(201,168,76,0.3);
+    background: linear-gradient(135deg, #1a1810 0%, #141414 100%);
+  }
+
+  .location-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+
+  .location-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--ivory);
+  }
+
+  .location-country {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.3rem;
+  }
+
+  .presence-note {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .presence-note span { color: var(--gold); }
+
+  /* ─── VALUES ─── */
+  .values {
+    background: var(--charcoal);
+  }
+
+  .values-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .values-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .value-item {
+    padding: 1.8rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: padding-left 0.3s;
+  }
+
+  .value-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+
+  .value-item:hover { padding-left: 0.5rem; }
+
+  .value-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 300;
+    color: var(--text-mid);
+    transition: color 0.3s;
+  }
+
+  .value-item:hover .value-name { color: var(--gold); }
+
+  .values-statement {
+    padding-top: 1rem;
+  }
+
+  .values-statement blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--ivory);
+    border-left: 1px solid var(--gold);
+    padding-left: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .values-statement p {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: var(--text-muted);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #050505;
+    padding: 4rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    border-top: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .footer-brand .nav-logo { font-size: 1.8rem; }
+
+  .footer-brand p {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    max-width: 280px;
+  }
+
+  .footer-col-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.2rem;
+  }
+
+  .footer-col ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-col ul li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .footer-col ul li:hover { color: var(--ivory); }
+
+  .footer-bottom {
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.04);
+  }
+
+  .footer-bottom p {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .footer-bottom span { color: var(--gold); }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 0 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .about { grid-template-columns: 1fr; gap: 3rem; }
+    .about-visual { display: none; }
+    .pillars-grid { grid-template-columns: 1fr; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .location-cards { flex-direction: column; align-items: center; }
+    .values-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); padding: 2rem 1.5rem; }
+    footer { grid-template-columns: 1fr 1fr; padding: 3rem 1.5rem; }
+    .footer-bottom { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 60">
+      <defs>
+        <linearGradient id="ngold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#E8C97A"/>
+          <stop offset="50%" style="stop-color:#C9A84C"/>
+          <stop offset="100%" style="stop-color:#A8843A"/>
+        </linearGradient>
+        <linearGradient id="ngoldtxt" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#E0C068"/>
+          <stop offset="100%" style="stop-color:#B8922E"/>
+        </linearGradient>
+        <filter id="nglow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1" result="cb"/>
+          <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Hex mark -->
+      <polygon points="10,8 28,8 37,23 28,38 10,38 1,23" fill="none" stroke="url(#ngold)" stroke-width="1.2" filter="url(#nglow)"/>
+      <polygon points="10,13 25,13 33,23 25,33 10,33 2,23" fill="none" stroke="url(#ngold)" stroke-width="0.5" opacity="0.4"/>
+      <polygon points="19,16 26,23 19,30 12,23" fill="url(#ngold)" opacity="0.95"/>
+      <!-- Divider -->
+      <line x1="44" y1="8" x2="44" y2="38" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+      <!-- NWX -->
+      <text x="52" y="28" font-family="Georgia,serif" font-size="22" font-weight="400" letter-spacing="3" fill="url(#ngoldtxt)">NWX</text>
+      <!-- GLOBAL -->
+      <text x="53" y="38" font-family="Arial Narrow,Arial,sans-serif" font-size="7" font-weight="400" letter-spacing="5" fill="#888880">GLOBAL</text>
+    </svg>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#pillars">What We Do</a></li>
+    <li><a href="#audience">Who We Serve</a></li>
+    <li><a href="#presence">Presence</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+
+  <!-- Rotating geometric -->
+  <svg class="hero-geo" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="200,10 390,105 390,295 200,390 10,295 10,105" stroke="#C9A84C" stroke-width="0.5"/>
+    <polygon points="200,40 360,120 360,280 200,360 40,280 40,120" stroke="#C9A84C" stroke-width="0.3"/>
+    <circle cx="200" cy="200" r="130" stroke="#C9A84C" stroke-width="0.4"/>
+    <circle cx="200" cy="200" r="80" stroke="#C9A84C" stroke-width="0.3"/>
+    <line x1="200" y1="10" x2="200" y2="390" stroke="#C9A84C" stroke-width="0.2"/>
+    <line x1="10" y1="200" x2="390" y2="200" stroke="#C9A84C" stroke-width="0.2"/>
+    <line x1="55" y1="55" x2="345" y2="345" stroke="#C9A84C" stroke-width="0.2"/>
+    <line x1="345" y1="55" x2="55" y2="345" stroke="#C9A84C" stroke-width="0.2"/>
+  </svg>
+
+  <div class="hero-logo" style="margin-bottom:3rem;opacity:0;animation:fade-up 0.8s 0.1s ease forwards;">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 340 80" style="height:80px;width:auto;display:block;">
+      <defs>
+        <linearGradient id="hgold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#E8C97A"/>
+          <stop offset="50%" style="stop-color:#C9A84C"/>
+          <stop offset="100%" style="stop-color:#A8843A"/>
+        </linearGradient>
+        <linearGradient id="hgoldtxt" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#E0C068"/>
+          <stop offset="100%" style="stop-color:#B8922E"/>
+        </linearGradient>
+        <filter id="hglow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="1.5" result="cb"/>
+          <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <!-- Hex mark -->
+      <polygon points="14,10 38,10 50,30 38,50 14,50 2,30" fill="none" stroke="url(#hgold)" stroke-width="1.4" filter="url(#hglow)"/>
+      <polygon points="14,17 35,17 46,30 35,43 14,43 3,30" fill="none" stroke="url(#hgold)" stroke-width="0.6" opacity="0.4"/>
+      <polygon points="26,20 37,30 26,40 15,30" fill="url(#hgold)" opacity="0.95"/>
+      <line x1="2" y1="30" x2="50" y2="30" stroke="#C9A84C" stroke-width="0.5" opacity="0.2"/>
+      <line x1="26" y1="10" x2="26" y2="50" stroke="#C9A84C" stroke-width="0.5" opacity="0.2"/>
+      <!-- Divider -->
+      <line x1="62" y1="8" x2="62" y2="52" stroke="#C9A84C" stroke-width="0.7" opacity="0.35"/>
+      <!-- NWX -->
+      <text x="74" y="38" font-family="Georgia,serif" font-size="32" font-weight="400" letter-spacing="4" fill="url(#hgoldtxt)">NWX</text>
+      <!-- GLOBAL -->
+      <text x="75" y="50" font-family="Arial Narrow,Arial,sans-serif" font-size="9" font-weight="400" letter-spacing="7" fill="#888880">GLOBAL</text>
+      <!-- Divider 2 -->
+      <line x1="195" y1="14" x2="195" y2="52" stroke="#C9A84C" stroke-width="0.6" opacity="0.3"/>
+      <!-- Tagline stacked -->
+      <text x="207" y="26" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="700" letter-spacing="3" fill="#C9A84C" opacity="0.9">ECOSYSTEM</text>
+      <text x="207" y="38" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="400" letter-spacing="3" fill="#888880">TRADING</text>
+      <text x="207" y="50" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="400" letter-spacing="3" fill="#888880">INVESTMENT</text>
+      <circle cx="203" cy="36" r="1" fill="#C9A84C" opacity="0.4"/>
+      <circle cx="203" cy="48" r="1" fill="#C9A84C" opacity="0.4"/>
+    </svg>
+  </div>
+
+
+  <h1 class="hero-title">
+    Where Business<br>
+    <em>Meets</em> Possibility
+  </h1>
+  <p class="hero-tagline">
+    Ecosystem <span>·</span> Trading <span>·</span> Investment
+  </p>
+  <p class="hero-desc">
+    NWX Global is a world-class platform empowering international business owners, professionals, and digital nomads — enhancing both their enterprise and their wellbeing.
+  </p>
+  <div class="hero-cta">
+    <a href="#pillars" class="btn-primary">Explore NWX</a>
+    <a href="#about" class="btn-ghost">Our Story</a>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">2</div>
+    <div class="stat-label">HQ Cities</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">∞</div>
+    <div class="stat-label">Global Reach</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Core Pillars</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">360°</div>
+    <div class="stat-label">Business & Wellness</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-text">
+    <p class="section-eyebrow">Who We Are</p>
+    <h2 class="section-title">A New <em>World</em><br>Exchange</h2>
+    <p>NWX Global is a dynamic, boundary-defying company headquartered in <strong>Bali and Jakarta, Indonesia</strong> — two of Southeast Asia's most vibrant epicenters — with a mandate to serve a global clientele without limitation.</p>
+    <p>We were founded on a singular conviction: that today's international business owners, high-achieving professionals, and digital nomads deserve a partner that understands both the <strong>complexity of global commerce</strong> and the human need for balance and wellbeing.</p>
+    <p>Through our three interconnected pillars — <strong>Ecosystem, Trading, and Investment</strong> — we provide the infrastructure, intelligence, and community that enables our clients to operate with confidence anywhere in the world.</p>
+  </div>
+  <div class="about-visual">
+    <div class="about-card main">
+      <div class="about-card-label">Our Mission</div>
+      <div class="about-card-text">To enhance business performance and personal wellness for the modern global citizen.</div>
+    </div>
+    <div class="about-card accent">
+      <div class="about-card-label">Worldwide Operations</div>
+      <div class="about-card-num">IDN+</div>
+      <div class="about-card-sub">Based in Indonesia, built for the world</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILLARS -->
+<section class="pillars" id="pillars">
+  <div class="pillars-header">
+    <p class="section-eyebrow">Core Pillars</p>
+    <h2 class="section-title">Three Dimensions<br>of <em>Excellence</em></h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar-card">
+      <div class="pillar-num">01</div>
+      <div class="pillar-title">Ecosystem</div>
+      <div class="pillar-sub">Community & Infrastructure</div>
+      <p class="pillar-desc">A curated network of global professionals, entrepreneurs, and nomads. NWX builds and nurtures the connections, tools, and environments that allow modern businesses to thrive — wherever in the world they operate.</p>
+      <div class="pillar-tags">
+        <span class="tag">Network</span>
+        <span class="tag">Community</span>
+        <span class="tag">Partnerships</span>
+        <span class="tag">Wellness</span>
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">02</div>
+      <div class="pillar-title">Trading</div>
+      <div class="pillar-sub">Markets & Commerce</div>
+      <p class="pillar-desc">Intelligent access to global markets, trade facilitation, and commercial exchange. NWX empowers clients with the insights, platforms, and support needed to navigate international trade with precision and confidence.</p>
+      <div class="pillar-tags">
+        <span class="tag">Global Markets</span>
+        <span class="tag">Commodities</span>
+        <span class="tag">FX</span>
+        <span class="tag">B2B Trade</span>
+      </div>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-num">03</div>
+      <div class="pillar-title">Investment</div>
+      <div class="pillar-sub">Capital & Growth</div>
+      <p class="pillar-desc">Strategic capital deployment for long-term value creation. NWX connects investors and businesses with curated opportunities across emerging and established markets, with a focus on sustainable growth and measurable impact.</p>
+      <div class="pillar-tags">
+        <span class="tag">Portfolio</span>
+        <span class="tag">Ventures</span>
+        <span class="tag">Real Assets</span>
+        <span class="tag">Advisory</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHO WE SERVE -->
+<section class="audience" id="audience">
+  <div class="audience-header">
+    <p class="section-eyebrow">Who We Serve</p>
+    <h2 class="section-title">Built for the <em>Global</em> Citizen</h2>
+  </div>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-icon">🌐</div>
+      <div class="audience-title">International Business Owners</div>
+      <p class="audience-desc">Entrepreneurs and founders operating across borders who need a trusted partner to scale their operations, access new markets, and build the infrastructure for sustainable international growth.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">💼</div>
+      <div class="audience-title">Global Professionals</div>
+      <p class="audience-desc">High-caliber executives, consultants, and specialists who navigate multiple markets and jurisdictions — requiring sophisticated support for both their professional endeavors and personal wellbeing.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon">✈️</div>
+      <div class="audience-title">Digital Nomads</div>
+      <p class="audience-desc">Location-independent entrepreneurs and remote workers who demand seamless global solutions: from banking and investment to lifestyle and community — all without borders.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PRESENCE -->
+<section class="presence" id="presence">
+  <div class="presence-header">
+    <p class="section-eyebrow">Our Presence</p>
+    <h2 class="section-title">Rooted in Indonesia,<br><em>Reaching</em> the World</h2>
+  </div>
+  <div class="location-cards">
+    <div class="location-card primary">
+      <div class="location-badge">⬡ Headquarters</div>
+      <div class="location-name">Bali</div>
+      <div class="location-country">Indonesia — Asia Pacific Hub</div>
+    </div>
+    <div class="location-card">
+      <div class="location-badge">⬡ Office</div>
+      <div class="location-name">Jakarta</div>
+      <div class="location-country">Indonesia — Business Capital</div>
+    </div>
+    <div class="location-card">
+      <div class="location-badge">◎ Operations</div>
+      <div class="location-name">Worldwide</div>
+      <div class="location-country">No Boundaries</div>
+    </div>
+  </div>
+  <p class="presence-note">Operating across <span>Asia Pacific</span>, <span>Europe</span>, <span>Middle East</span> and beyond</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- VALUES -->
+<section class="values" id="values">
+  <div class="values-layout">
+    <div>
+      <p class="section-eyebrow">Our Values</p>
+      <h2 class="section-title" style="margin-bottom:2rem;">What We<br><em>Stand For</em></h2>
+      <div class="values-list">
+        <div class="value-item"><div class="value-name">Global Perspective</div></div>
+        <div class="value-item"><div class="value-name">Integrity First</div></div>
+        <div class="value-item"><div class="value-name">Holistic Growth</div></div>
+        <div class="value-item"><div class="value-name">Innovation</div></div>
+        <div class="value-item"><div class="value-name">Community</div></div>
+        <div class="value-item"><div class="value-name">Wellness</div></div>
+      </div>
+    </div>
+    <div class="values-statement">
+      <blockquote>"Business without borders, growth without compromise — the NWX philosophy."</blockquote>
+      <p>At NWX Global, we believe that true success is multidimensional. It is not enough to build profitable enterprises if the people behind them are not thriving. That is why everything we do — from our trading desks to our wellness programs — is designed to serve the whole person and the whole business.</p>
+      <br>
+      <p>Indonesia is our foundation: a land of extraordinary diversity, strategic geopolitical positioning, and boundless opportunity. From Bali's creative energy to Jakarta's commercial power, we draw on the best of this archipelago to deliver world-class service to clients everywhere.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-brand">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" style="height:60px;width:auto;display:block;margin-bottom:1rem;">
+      <defs>
+        <linearGradient id="fgold" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#E8C97A"/>
+          <stop offset="50%" style="stop-color:#C9A84C"/>
+          <stop offset="100%" style="stop-color:#A8843A"/>
+        </linearGradient>
+        <linearGradient id="fgoldtxt" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#E0C068"/>
+          <stop offset="100%" style="stop-color:#B8922E"/>
+        </linearGradient>
+        <filter id="fglow" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="2" result="cb"/>
+          <feMerge><feMergeNode in="cb"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+      <rect x="0" y="0" width="600" height="1.5" fill="url(#fgold)" opacity="0.5"/>
+      <rect x="0" y="158.5" width="600" height="1.5" fill="url(#fgold)" opacity="0.35"/>
+      <polygon points="80,22 110,22 124,46 110,70 80,70 66,46" fill="none" stroke="url(#fgold)" stroke-width="1.4" filter="url(#fglow)"/>
+      <polygon points="80,30 106,30 118,46 106,62 80,62 68,46" fill="none" stroke="url(#fgold)" stroke-width="0.6" opacity="0.4"/>
+      <polygon points="95,36 106,46 95,56 84,46" fill="url(#fgold)" opacity="0.95"/>
+      <line x1="66" y1="46" x2="124" y2="46" stroke="#C9A84C" stroke-width="0.5" opacity="0.25"/>
+      <line x1="95" y1="22" x2="95" y2="70" stroke="#C9A84C" stroke-width="0.5" opacity="0.25"/>
+      <line x1="145" y1="18" x2="145" y2="74" stroke="#C9A84C" stroke-width="0.6" opacity="0.35"/>
+      <text x="162" y="60" font-family="Georgia,serif" font-size="46" font-weight="400" letter-spacing="6" fill="url(#fgoldtxt)">NWX</text>
+      <text x="163" y="80" font-family="Arial Narrow,Arial,sans-serif" font-size="11" font-weight="400" letter-spacing="10" fill="#888880">GLOBAL</text>
+      <line x1="340" y1="26" x2="340" y2="88" stroke="#C9A84C" stroke-width="0.6" opacity="0.3"/>
+      <text x="360" y="43" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="700" letter-spacing="4" fill="#C9A84C" opacity="0.9">ECOSYSTEM</text>
+      <text x="360" y="60" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="400" letter-spacing="4" fill="#888880">TRADING</text>
+      <text x="360" y="77" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="400" letter-spacing="4" fill="#888880">INVESTMENT</text>
+      <circle cx="356" cy="57" r="1.2" fill="#C9A84C" opacity="0.4"/>
+      <circle cx="356" cy="74" r="1.2" fill="#C9A84C" opacity="0.4"/>
+      <line x1="50" y1="100" x2="550" y2="100" stroke="#C9A84C" stroke-width="0.4" opacity="0.18"/>
+      <text x="300" y="122" text-anchor="middle" font-family="Arial Narrow,Arial,sans-serif" font-size="8" font-weight="400" letter-spacing="7" fill="#666058">BALI  ·  JAKARTA  ·  WORLDWIDE</text>
+      <line x1="50" y1="135" x2="550" y2="135" stroke="#C9A84C" stroke-width="0.4" opacity="0.18"/>
+      <path d="M 18 18 L 18 28 M 18 18 L 28 18" stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.35"/>
+      <path d="M 582 18 L 582 28 M 582 18 L 572 18" stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.35"/>
+      <path d="M 18 142 L 18 132 M 18 142 L 28 142" stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.35"/>
+      <path d="M 582 142 L 582 132 M 582 142 L 572 142" stroke="#C9A84C" stroke-width="0.8" fill="none" opacity="0.35"/>
+    </svg>
+    <p>Empowering international business owners, professionals, and digital nomads to enhance their business and wellness — from Indonesia to the world.</p>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Pillars</div>
+    <ul>
+      <li>Ecosystem</li>
+      <li>Trading</li>
+      <li>Investment</li>
+      <li>Wellness</li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Company</div>
+    <ul>
+      <li>About NWX</li>
+      <li>Our Team</li>
+      <li>Partners</li>
+      <li>Careers</li>
+    </ul>
+  </div>
+  <div class="footer-col">
+    <div class="footer-col-title">Connect</div>
+    <ul>
+      <li>Bali, Indonesia</li>
+      <li>Jakarta, Indonesia</li>
+      <li>Worldwide Operations</li>
+      <li>hello@nwxglobal.com</li>
+    </ul>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2025 <span>NWX Global</span>. All rights reserved.</p>
+  <p>Ecosystem <span>·</span> Trading <span>·</span> Investment</p>
+</div>
+
+</body>
+</html>
