@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NWX Global — Network · Trading · Investment</title>
+<title>NWX Global — Ecosystem · Trading · Investment</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -503,6 +503,142 @@
     padding: 0.3rem 0.8rem;
   }
 
+  /* ─── STRATEGIC DEVELOPMENT ─── */
+  .sdp {
+    background: var(--charcoal);
+    padding: 7rem 4rem;
+  }
+
+  .sdp-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .sdp-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+    margin-bottom: 4rem;
+  }
+
+  .sdp-header-left {}
+
+  .sdp-header-right {
+    padding-top: 1rem;
+  }
+
+  .sdp-header-right p {
+    font-size: 0.925rem;
+    line-height: 1.9;
+    color: var(--text-mid);
+    margin-bottom: 1rem;
+  }
+
+  .sdp-header-right p strong {
+    color: var(--ivory);
+    font-weight: 500;
+  }
+
+  .sdp-services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(201,168,76,0.1);
+    margin-bottom: 3rem;
+  }
+
+  .sdp-service {
+    background: var(--slate);
+    padding: 2rem;
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .sdp-service:hover { background: var(--mist); }
+
+  .sdp-service-icon {
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .sdp-service-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: var(--ivory);
+    margin-bottom: 0.5rem;
+  }
+
+  .sdp-service-desc {
+    font-size: 0.8rem;
+    line-height: 1.7;
+    color: var(--text-muted);
+  }
+
+  .sdp-industries {
+    background: var(--obsidian);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 2rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .sdp-industries-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  .sdp-industry-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+  }
+
+  .sdp-industry-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 0.35rem 0.9rem;
+    transition: border-color 0.3s, color 0.3s;
+  }
+
+  .sdp-industry-tag:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .sdp-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .sdp-cta p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-style: italic;
+    font-family: 'Cormorant Garamond', serif;
+  }
+
+  @media (max-width: 900px) {
+    .sdp { padding: 4rem 1.5rem; }
+    .sdp-header { grid-template-columns: 1fr; gap: 2rem; }
+    .sdp-services { grid-template-columns: 1fr; }
+    .sdp-industries { flex-direction: column; align-items: flex-start; gap: 1rem; }
+  }
+
   /* ─── WHO WE SERVE ─── */
   .audience {
     background: var(--charcoal);
@@ -857,7 +993,7 @@
       <!-- Divider 2 -->
       <line x1="195" y1="14" x2="195" y2="52" stroke="#C9A84C" stroke-width="0.6" opacity="0.3"/>
       <!-- Tagline stacked -->
-      <text x="207" y="26" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="700" letter-spacing="3" fill="#C9A84C" opacity="0.9">NETWORK</text>
+      <text x="207" y="26" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="700" letter-spacing="3" fill="#C9A84C" opacity="0.9">ECOSYSTEM</text>
       <text x="207" y="38" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="400" letter-spacing="3" fill="#888880">TRADING</text>
       <text x="207" y="50" font-family="Arial Narrow,Arial,sans-serif" font-size="8.5" font-weight="400" letter-spacing="3" fill="#888880">INVESTMENT</text>
       <circle cx="203" cy="36" r="1" fill="#C9A84C" opacity="0.4"/>
@@ -871,7 +1007,7 @@
     <em>Meets</em> Possibility
   </h1>
   <p class="hero-tagline">
-    Network <span>·</span> Trading <span>·</span> Investment
+    Ecosystem <span>·</span> Trading <span>·</span> Investment
   </p>
   <p class="hero-desc">
     NWX Global connects international business owners, professionals, and digital nomads to a world of opportunity — empowering both their business growth and personal wellness, from Bali to the world.
@@ -916,7 +1052,7 @@
     <h2 class="section-title">A New <em>World</em><br>Exchange</h2>
     <p>NWX Global is a dynamic, boundary-defying company headquartered in <strong>Bali and Jakarta, Indonesia</strong> — two of Southeast Asia's most vibrant epicenters — with a mandate to serve a global clientele without limitation.</p>
     <p>We were founded on a singular conviction: that today's international business owners, high-achieving professionals, and digital nomads deserve more than just a service provider — they need a <strong>trusted global partner</strong> that understands both the complexity of cross-border commerce and the human need for balance and wellbeing.</p>
-    <p>Through our three interconnected pillars — <strong>Network, Trading, and Investment</strong> — we build the connections, open the markets, and deploy the capital that enables our clients to grow with confidence, anywhere in the world.</p>
+    <p>Through our three interconnected pillars — <strong>Ecosystem, Trading, and Investment</strong> — we build the connections, open the markets, and deploy the capital that enables our clients to grow with confidence, anywhere in the world.</p>
   </div>
   <div class="about-visual">
     <div class="about-card main">
@@ -942,9 +1078,9 @@
   <div class="pillars-grid">
     <div class="pillar-card">
       <div class="pillar-num">01</div>
-      <div class="pillar-title">Network</div>
-      <div class="pillar-sub">People & Wellness</div>
-      <p class="pillar-desc">NWX connects international business owners, professionals, and digital nomads into a powerful global network. Beyond business, we champion personal wellness — because sustainable success is built on thriving people, not just thriving companies.</p>
+      <div class="pillar-title">Ecosystem</div>
+      <div class="pillar-sub">Community & Infrastructure</div>
+      <p class="pillar-desc">NWX connects international business owners, professionals, and digital nomads into a powerful global ecosystem. Beyond business, we champion personal wellness — because sustainable success is built on thriving people, not just thriving companies.</p>
       <div class="pillar-tags">
         <span class="tag">Global Community</span>
         <span class="tag">Wellness</span>
@@ -981,7 +1117,79 @@
 
 <div class="divider"></div>
 
-<!-- WHO WE SERVE -->
+<!-- STRATEGIC DEVELOPMENT PARTNER -->
+<section class="sdp" id="sdp">
+  <div class="sdp-inner">
+
+    <div class="sdp-header">
+      <div class="sdp-header-left">
+        <p class="section-eyebrow">Ecosystem · Featured Service</p>
+        <h2 class="section-title">Strategic<br><em>Development</em><br>Partner</h2>
+      </div>
+      <div class="sdp-header-right">
+        <p>Global companies entering Southeast Asia — particularly Indonesia — face a landscape unlike any other: rich in opportunity, yet layered with complexity. <strong>NWX Global serves as your Strategic Development Partner</strong>, navigating this terrain on your behalf so you can focus on what you do best.</p>
+        <p>Whether you are a brand exploring market entry, a company seeking local partnerships, or an investor identifying the right assets — NWX brings the network, the knowledge, and the ground presence to make it happen. We operate across Indonesia and beyond, with no limitation on industry or scale.</p>
+        <p><strong>This is not consulting. This is partnership.</strong> We are invested in your success, and we work alongside you every step of the way.</p>
+      </div>
+    </div>
+
+    <div class="sdp-services">
+      <div class="sdp-service">
+        <span class="sdp-service-icon">🗺️</span>
+        <div class="sdp-service-title">Market Entry Strategy</div>
+        <p class="sdp-service-desc">In-depth market analysis, competitive landscape mapping, and a tailored go-to-market strategy designed for the Indonesian and Southeast Asian context.</p>
+      </div>
+      <div class="sdp-service">
+        <span class="sdp-service-icon">🤝</span>
+        <div class="sdp-service-title">Partner & Distributor Identification</div>
+        <p class="sdp-service-desc">Leveraging our extensive local network to identify, vet, and introduce the right local partners, distributors, agents, and collaborators for your business.</p>
+      </div>
+      <div class="sdp-service">
+        <span class="sdp-service-icon">⚖️</span>
+        <div class="sdp-service-title">Regulatory & Compliance Navigation</div>
+        <p class="sdp-service-desc">Guidance through Indonesia's regulatory landscape — from business licensing and import regulations to sector-specific compliance requirements.</p>
+      </div>
+      <div class="sdp-service">
+        <span class="sdp-service-icon">🏛️</span>
+        <div class="sdp-service-title">Government & Institutional Relations</div>
+        <p class="sdp-service-desc">Building and managing relationships with relevant government bodies, industry associations, and institutional stakeholders to support your operations.</p>
+      </div>
+      <div class="sdp-service">
+        <span class="sdp-service-icon">🏢</span>
+        <div class="sdp-service-title">Entity & Office Setup</div>
+        <p class="sdp-service-desc">End-to-end support for establishing your legal entity, representative office, or operational base in Indonesia — from structure to execution.</p>
+      </div>
+      <div class="sdp-service">
+        <span class="sdp-service-icon">📈</span>
+        <div class="sdp-service-title">Business Development & Sales</div>
+        <p class="sdp-service-desc">Active representation in the market — identifying opportunities, opening doors, and driving revenue growth on your behalf as your boots on the ground.</p>
+      </div>
+    </div>
+
+    <div class="sdp-industries">
+      <span class="sdp-industries-label">Industries we serve</span>
+      <div class="sdp-industry-tags">
+        <span class="sdp-industry-tag">Commodity Trading</span>
+        <span class="sdp-industry-tag">Wellness</span>
+        <span class="sdp-industry-tag">Real Estate</span>
+        <span class="sdp-industry-tag">F&B</span>
+        <span class="sdp-industry-tag">Fintech</span>
+        <span class="sdp-industry-tag">Brands & Retail</span>
+        <span class="sdp-industry-tag">Technology</span>
+        <span class="sdp-industry-tag">Investment Funds</span>
+        <span class="sdp-industry-tag">Healthcare</span>
+        <span class="sdp-industry-tag">Education</span>
+        <span class="sdp-industry-tag">& More</span>
+      </div>
+    </div>
+
+    <div class="sdp-cta">
+      <a href="mailto:partners@nwxglobal.com" class="btn-primary">Discuss Your Market Entry</a>
+      <p>"Every global company deserves a partner who knows the ground."</p>
+    </div>
+
+  </div>
+</section>
 <section class="audience" id="audience">
   <div class="audience-header">
     <p class="section-eyebrow">Who We Serve</p>
@@ -1003,7 +1211,6 @@
       <div class="audience-title">Digital Nomads</div>
       <p class="audience-desc">Location-independent entrepreneurs and remote workers who demand seamless global solutions: from banking and investment to lifestyle and community — all without borders.</p>
     </div>
-  </div>
 </section>
 
 <div class="divider"></div>
@@ -1092,7 +1299,7 @@
       <text x="162" y="60" font-family="Georgia,serif" font-size="46" font-weight="400" letter-spacing="6" fill="url(#fgoldtxt)">NWX</text>
       <text x="163" y="80" font-family="Arial Narrow,Arial,sans-serif" font-size="11" font-weight="400" letter-spacing="10" fill="#888880">GLOBAL</text>
       <line x1="340" y1="26" x2="340" y2="88" stroke="#C9A84C" stroke-width="0.6" opacity="0.3"/>
-      <text x="360" y="43" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="700" letter-spacing="4" fill="#C9A84C" opacity="0.9">NETWORK</text>
+      <text x="360" y="43" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="700" letter-spacing="4" fill="#C9A84C" opacity="0.9">ECOSYSTEM</text>
       <text x="360" y="60" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="400" letter-spacing="4" fill="#888880">TRADING</text>
       <text x="360" y="77" font-family="Arial Narrow,Arial,sans-serif" font-size="9.5" font-weight="400" letter-spacing="4" fill="#888880">INVESTMENT</text>
       <circle cx="356" cy="57" r="1.2" fill="#C9A84C" opacity="0.4"/>
@@ -1110,7 +1317,7 @@
   <div class="footer-col">
     <div class="footer-col-title">Pillars</div>
     <ul>
-      <li>Network</li>
+      <li>Ecosystem</li>
       <li>Trading</li>
       <li>Investment</li>
       <li>Wellness</li>
@@ -1137,7 +1344,7 @@
 </footer>
 <div class="footer-bottom">
   <p>© 2025 <span>NWX Global</span>. All rights reserved.</p>
-  <p>Network <span>·</span> Trading <span>·</span> Investment</p>
+  <p>Ecosystem <span>·</span> Trading <span>·</span> Investment</p>
 </div>
 
 </body>
